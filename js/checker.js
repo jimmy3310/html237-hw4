@@ -28,9 +28,9 @@ window.fbAsyncInit = function(){
     results.empty(); 
     $('.hw4-complete').remove(); 
        FB.login(function(){
-						 console.log('Logged in!');
-						 
-       FB.api('/me/groups', function(resp){
+			console.log('Logged in!');
+		FB.api('/me/groups', function(resp){
+			console.log('user-groups:!, resp.data');
         var i;
         for(i=0; i<resp.data.length; i+=1){
           if( junkGroups.indexOf( resp.data[i].id ) !== -1 ){
