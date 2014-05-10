@@ -19,7 +19,7 @@ $.getJSON("http://jsbin.com/jaziroja/1", {}, function(data){
 
 window.fbAsyncInit = function(){
   FB.init({
-    appId: '699520453426867', // 若可以，請換成自己的 App ID !
+    appId: '1432032383716667', // 若可以，請換成自己的 App ID !
     status: true
   });
 
