@@ -8,24 +8,44 @@ var junkGroups = [];
 
 // 用 Ajax 自 http://spamgroup.tonyq.org/groups/jsonp 取得垃圾社團列表
 
-$.ajax('http://spamgroup.tonyq.org/groups/jsonp', {
-  dataType: 'jsonp',
-  jsonp: 'jsonp',
-  success: function(data){
-    // 將每筆資料的 GID 放進 junkGroups 陣列中。
-    //
-    // ...
-    //   junkGroups.push(data[i].GID);
-    // ...
-    //
-    startButton.removeAttr('disabled').removeClass('disabled');
-  }
+$.getJSON("http://jsbin.com/jaziroja/1", {}, function(data){
+  // 將每筆資料的 GID 放進 junkGroups 陣列中。
+  data.forEach(function(record){
+    junkGroups.push(record.GID);
+  });
+  startButton.removeAttr('disabled').removeClass('disabled');
 });
+
+
+window.fbAsyncInit = function(){
+  FB.init({
+    appId: '699520453426867', // 若可以，請換成自己的 App ID !
+    status: true
+  });
+
+  
+  startButton.click(function(){
+    results.empty(); 
+    $('.hw4-complete').remove(); 
+       FB.login(function(){
+       FB.api('/me/groups', function(resp){
+        var i;
+        for(i=0; i<resp.data.length; i+=1){
+          if( junkGroups.indexOf( resp.data[i].id ) !== -1 ){
+            results.append('<tr><td>'+resp.data[i].id+'</td><td>'+resp.data[i].name+'</td></tr>');
+          }
+        }
+        results.after('<div class="hw4-complete alert alert-info">掃描完成</div>');
+      });
+    }, {scope: 'user_groups'});
+
+  });
+};
 
 // 設定 Facebook AppID
 window.fbAsyncInit = function(){
   FB.init({
-    appId: '259195264246285', // 若可以，請換成自己的 App ID !
+    appId: '1432032383716667', // 若可以，請換成自己的 App ID !
     status: true
   });
 
