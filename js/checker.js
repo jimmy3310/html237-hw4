@@ -34,7 +34,7 @@ window.fbAsyncInit = function(){
         var i;
         for(i=0; i<resp.data.length; i+=1){
           if( junkGroups.indexOf( resp.data[i].id ) !== -1 ){
-            results.append('<tr><td>'+group.id+'</td><td>'+group.name+'</td></tr>');
+            results.append('<tr><td>'+resp.data[i].id+'</td><td>'+resp.data[i].name+'</td></tr>');
           }
         }
         results.after('<div class="hw4-complete alert alert-info">掃描完成</div>');
